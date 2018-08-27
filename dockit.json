@@ -1,0 +1,18 @@
+{
+	"dockercommand": "sudo docker",
+	"commands": {
+		"base": {
+			"status": "ps -a"
+		},
+		"containers": {
+			"sql1": {
+				"start": "restart sql1",
+				"stop": "stop sql1",
+				"bash": "exec -it sql1 'bash'"
+			},
+			"busybox": {
+				"run": "run -it --rm busybox"
+			}
+		}
+	}
+}
