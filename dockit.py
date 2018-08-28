@@ -12,7 +12,8 @@ class CDockerMgr:
 
 	def ExecuteBaseCommand(self, currentCommand):
 		for childkey,childvalue in self.configData["commands"]["base"].items():
-			if childkey == currentCommand:
+			keyCommand,keyHelp = self.GetKeyParts(childkey)
+			if keyCommand == currentCommand:
 				self.ExecDocker(childvalue)
 		self.ShowHelp()
 
@@ -29,17 +30,34 @@ class CDockerMgr:
 		os.system(fullCmd)
 		exit(0)
 
+	def GetKeyParts(self, keyValue):
+		keySplit = keyValue.split("|")
+		keyCommand = keySplit[0]
+		if len(keySplit) == 2:
+			keyHelp = keySplit[1]
+		else:
+			keyHelp = ""
+
+		return keyCommand,keyHelp
+
+	def GetHelpLine(self, keyValue):
+		keyCommand,keyHelp = self.GetKeyParts(keyValue)
+		if keyHelp == "":
+			return "{0}".format(keyCommand)
+		else:
+			return "{0} ({1})".format(keyCommand, keyHelp)
+
 	def ShowHelp(self):
 		print("USAGE:")
 		print("\tdockit <container> <command>")
 		print("")
 		print("Valid containers and commands:")
 		for childkey,childvalue in self.configData["commands"]["base"].items():
-			print("\t{0}".format(childkey))
+			print(self.GetHelpLine(childkey))
 		for containerKey in self.configData["commands"]["containers"]:
-			print("\t{0}".format(containerKey))
+			print("\t{0}".format(self.GetHelpLine(containerKey)))
 			for childkey,childvalue in self.configData["commands"]["containers"][containerKey].items():
-				print("\t\t{0}".format(childkey))
+				print("\t\t{0}".format(self.GetHelpLine(childkey)))
 		exit(0)
 
 myDockerMgr = CDockerMgr()

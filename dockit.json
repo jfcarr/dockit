@@ -3,7 +3,7 @@
 	"commands": {
 		"base": {
 			"info": "info",
-			"list": "ps -a",
+			"list|List currently installed containers": "ps -a",
 			"stats": "stats"
 		},
 		"containers": {
