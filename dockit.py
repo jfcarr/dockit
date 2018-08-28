@@ -50,11 +50,13 @@ class CDockerMgr:
 
 	def ShowHelp(self):
 		print("USAGE:")
+		print("\tdockit <command>")
+		print("\tor")
 		print("\tdockit <container> <command>")
 		print("")
 		print("Valid containers and commands:")
 		for childkey,childvalue in self.configData["commands"]["base"].items():
-			print(self.GetHelpLine(childkey))
+			print("\t{0}".format(self.GetHelpLine(childkey)))
 		for containerKey in self.configData["commands"]["containers"]:
 			print("\t{0}".format(self.GetHelpLine(containerKey)))
 			for childkey,childvalue in self.configData["commands"]["containers"][containerKey].items():
