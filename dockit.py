@@ -6,7 +6,8 @@ import sys
 
 class CDockerMgr:
 	def __init__(self):
-		with open('dockit.json') as json_data:
+		full_config_path = "{0}/dockit.json".format(os.path.dirname(os.path.realpath(__file__)))
+		with open(full_config_path) as json_data:
 			self.configData = json.load(json_data)
 			self.dockerCmd = self.configData["dockercommand"]
 
