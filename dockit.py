@@ -46,7 +46,7 @@ class CDockerMgr:
 		if keyHelp == "":
 			return "{0}".format(keyCommand)
 		else:
-			return "{0} ({1})".format(keyCommand, keyHelp)
+			return "{0}\t{1}".format(keyCommand, keyHelp)
 
 	def ShowHelp(self):
 		print("USAGE:")

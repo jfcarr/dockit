@@ -2,20 +2,20 @@
 	"dockercommand": "sudo docker",
 	"commands": {
 		"base": {
-			"info": "info",
+			"info|Display system-wide information": "info",
 			"list|List currently installed containers": "ps -a",
-			"stats": "stats"
+			"stats|Display a live stream of container(s) resource usage statistics": "stats"
 		},
 		"containers": {
 			"busybox": {
-				"run": "run -it --rm busybox"
+				"run|Open a session, remove the container on exit": "run -it --rm busybox"
 			},
 			"sql1": {
-				"start": "restart sql1",
-				"stop": "stop sql1",
-				"bash": "exec -it sql1 'bash'",
-				"logs": "logs sql1",
-				"processes": "top sql1"
+				"start|(Re)start the container": "restart sql1",
+				"stop|Stop the container, if it is running": "stop sql1",
+				"bash|Open a bash session in the container": "exec -it sql1 'bash'",
+				"logs|Fetch the logs of the container": "logs sql1",
+				"processes|Display the container's running processes": "top sql1"
 			}
 		}
 	}
