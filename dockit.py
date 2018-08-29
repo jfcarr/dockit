@@ -20,9 +20,11 @@ class CDockerMgr:
 
 	def ExecuteContainerCommand(self, currentContainer, currentCommand):
 		for containerKey in self.configData["commands"]["containers"]:
-			if containerKey == currentContainer:
+			containerName,containerHelp = self.GetKeyParts(containerKey)
+			if containerName == currentContainer:
 				for childkey,childvalue in self.configData["commands"]["containers"][containerKey].items():
-					if childkey == currentCommand:
+					commandName,commandHelp = self.GetKeyParts(childkey)
+					if commandName == currentCommand:
 						self.ExecDocker(childvalue)
 		self.ShowHelp()
 
