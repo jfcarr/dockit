@@ -6,6 +6,11 @@
 			"list|List currently installed containers": "ps -a",
 			"stats|Display a live stream of container(s) resource usage statistics": "stats"
 		},
+		"service": {
+			"start|Start the Docker service daemon": "restart",
+			"stop|Stop the Docker service daemon": "stop",
+			"status|Show status of the Docker service daemon": "status"
+		},
 		"containers": {
 			"busybox": {
 				"run|Open a session, remove the container on exit": "run -it --rm busybox"

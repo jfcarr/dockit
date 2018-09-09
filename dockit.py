@@ -18,6 +18,13 @@ class CDockerMgr:
 				self.ExecDocker(childvalue)
 		self.ShowHelp()
 
+	def ExecuteServiceCommand(self, currentCommand):
+		for childkey,childvalue in self.configData["commands"]["service"].items():
+			keyCommand,keyHelp = self.GetKeyParts(childkey)
+			if keyCommand == currentCommand:
+				self.ExecService(childvalue)
+		self.ShowHelp()
+
 	def ExecuteContainerCommand(self, currentContainer, currentCommand):
 		for containerKey in self.configData["commands"]["containers"]:
 			containerName,containerHelp = self.GetKeyParts(containerKey)
@@ -30,6 +37,11 @@ class CDockerMgr:
 
 	def ExecDocker(self, args):
 		fullCmd = "{0} {1}".format(self.dockerCmd, args)
+		os.system(fullCmd)
+		exit(0)
+
+	def ExecService(self, args):
+		fullCmd = "sudo /etc/init.d/docker {0}".format(args)
 		os.system(fullCmd)
 		exit(0)
 
@@ -59,6 +71,11 @@ class CDockerMgr:
 		print("Valid containers and commands:")
 		for childkey,childvalue in self.configData["commands"]["base"].items():
 			print("\t{0}".format(self.GetHelpLine(childkey)))
+		
+		print("\tservice")
+		for childkey,childvalue in self.configData["commands"]["service"].items():
+			print("\t\t{0}".format(self.GetHelpLine(childkey)))
+		
 		for containerKey in self.configData["commands"]["containers"]:
 			print("\t{0}".format(self.GetHelpLine(containerKey)))
 			for childkey,childvalue in self.configData["commands"]["containers"][containerKey].items():
@@ -70,6 +87,9 @@ myDockerMgr = CDockerMgr()
 if len(sys.argv) == 2:
 	myDockerMgr.ExecuteBaseCommand(sys.argv[1])
 elif len(sys.argv) == 3:
-	myDockerMgr.ExecuteContainerCommand(sys.argv[1], sys.argv[2])
+	if sys.argv[1] == 'service':
+		myDockerMgr.ExecuteServiceCommand(sys.argv[2])
+	else:
+		myDockerMgr.ExecuteContainerCommand(sys.argv[1], sys.argv[2])
 else:
 	myDockerMgr.ShowHelp()
