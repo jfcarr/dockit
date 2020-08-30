@@ -15,12 +15,19 @@
 			"busybox": {
 				"run|Open a session, remove the container on exit": "run -it --rm busybox"
 			},
-			"sql1": {
-				"start|(Re)start the container": "restart sql1",
-				"stop|Stop the container, if it is running": "stop sql1",
-				"bash|Open a bash session in the container": "exec -it sql1 'bash'",
-				"logs|Fetch the logs of the container": "logs sql1",
-				"processes|Display the container's running processes": "top sql1"
+			"sqldev": {
+				"start|(Re)start the container": "restart sqldev",
+				"stop|Stop the container, if it is running": "stop sqldev",
+				"bash|Open a bash session in the container": "exec -it sqldev 'bash'",
+				"logs|Fetch the logs of the container": "logs sqldev",
+				"procs|Display the container's running processes": "top sqldev"
+			},
+			"mongodb": {
+				"run|Run the instance": "run -p 27017:27017 --name mongo-test -d mongo:4.4.0-bionic",
+				"start|(Re)start the container": "restart mongo-test",
+				"stop|Stop the container, if it is running": "stop mongo-test",
+				"shell|Open bash shell inside container": "exec -it mongo-test bash",
+				"logs|View logs": "logs mongo-test"
 			}
 		}
 	}
